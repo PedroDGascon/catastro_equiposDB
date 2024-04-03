@@ -1,17 +1,20 @@
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `catastro` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
--- Schema catastro
+-- Schema catastro 
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
 -- Schema catastro
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `catastro` ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `catastro`  DEFAULT CHARACTER SET utf8 ;
+USE `catastro` ;
 
 -- -----------------------------------------------------
 -- Table `catastro`.`disk_type`
 -- -----------------------------------------------------
+
+-- DROP TABLE disk_type;
+
 CREATE TABLE IF NOT EXISTS `catastro`.`disk_type` (
   `id` INT NOT NULL,
   `ssd_capacity` INT(4) NOT NULL,
@@ -25,14 +28,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catastro`.`office_tools` (
   `id` INT NOT NULL,
-  `office` VARCHAR(45) NULL,
-  `licence` VARCHAR(45) NULL,
-  `principal_account` VARCHAR(45) NULL,
-  `open_office` VARCHAR(45) NULL,
-  `slack` VARCHAR(45) NULL,
-  `adobe_reader` VARCHAR(45) NULL,
-  `web_browser` VARCHAR(45) NULL,
-  `anydesk` VARCHAR(45) NULL,
+  `office` CHAR(2) NULL,
+  `licence` CHAR(2) NULL,
+  `principal_account` CHAR(2) NULL,
+  `open_office` CHAR(2) NULL,
+  `slack` CHAR(2) NULL,
+  `adobe_reader` CHAR(2) NULL,
+  `web_browser` CHAR(2) NULL,
+  `anydesk` CHAR(2) NULL,
   `os_key` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -43,11 +46,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catastro`.`apps` (
   `id` INT NOT NULL,
-  `wacom` VARCHAR(45) NULL,
-  `sovos` VARCHAR(45) NULL,
-  `bupa` VARCHAR(45) NULL,
-  `toc` VARCHAR(45) NULL,
-  `rx_app` VARCHAR(45) NULL,
+  `wacom` CHAR(2) NULL,
+  `sovos` CHAR(2) NULL,
+  `bupa` CHAR(2) NULL,
+  `toc` CHAR(2) NULL,
+  `rx_app` CHAR(2) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -85,10 +88,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catastro`.`it_asset` (
   `id` INT NOT NULL,
-  `notebook` VARCHAR(45) NULL,
-  `tablet` VARCHAR(45) NULL,
-  `brand` VARCHAR(45) NULL,
-  `model` VARCHAR(45) NULL,
+  `notebook` CHAR(2) NULL,
+  `note_brand` VARCHAR(20) NULL,
+  `note_model` VARCHAR(20) NULL,
+  `tablet` CHAR(2) NULL,
+  `tablet_brand` VARCHAR(20) NULL,
+  `tablet_model` VARCHAR(20) NULL,
   `serial_number` VARCHAR(45) NULL,
   `disk_type_id` INT NOT NULL,
   `office_tools_id` INT NOT NULL,
@@ -156,12 +161,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `catastro`.`technologic_peripherals` (
   `id` INT NOT NULL,
-  `mouse` VARCHAR(45) NULL,
-  `keyboard` VARCHAR(45) NULL,
-  `headphones` VARCHAR(45) NULL,
-  `monitor` VARCHAR(45) NULL,
-  `extra_monitor` VARCHAR(45) NULL,
-  `notebook_lifter` VARCHAR(45) NULL,
+  `mouse` CHAR(2) NULL,
+  `keyboard` CHAR(2) NULL,
+  `headphones` CHAR(2) NULL,
+  `monitor` CHAR(2) NULL,
+  `extra_monitor` CHAR(2) NULL,
+  `notebook_lifter` CHAR(2) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -169,6 +174,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `catastro`.`branches`
 -- -----------------------------------------------------
+-- DROP TABLE branches;
+
+/*
 CREATE TABLE IF NOT EXISTS `catastro`.`branches` (
   `id` INT NOT NULL,
   `branch` VARCHAR(45) NULL,
@@ -193,15 +201,16 @@ CREATE TABLE IF NOT EXISTS `catastro`.`branches` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
+*/
 
 -- -----------------------------------------------------
 -- Table `catastro`.`users`
 -- -----------------------------------------------------
+/*
 CREATE TABLE IF NOT EXISTS `catastro`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `document_type` CHAR(2) NOT NULL,
-  `document_number` VARCHAR(9) NOT NULL,
+  `document_type` CHAR(10) NOT NULL,
+  `document_number` VARCHAR(20) NOT NULL,
   `name` VARCHAR(45) NOT NULL,
   `last_name` VARCHAR(45) NOT NULL,
   `rol` VARCHAR(45) NULL,
@@ -246,9 +255,9 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`timestamps`
+-- Table `catastro`.`timestamps`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`timestamps` (
+CREATE TABLE IF NOT EXISTS `catastro`.`timestamps` (
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NULL,
   `users_id` INT NOT NULL,
@@ -265,9 +274,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`timestamps` (
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`timestamps_preparation`
+-- Table `catastro`.`timestamps_preparation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`timestamps_preparation` (
+CREATE TABLE IF NOT EXISTS `catastro`.`timestamps_preparation` (
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `update_time` TIMESTAMP NULL,
   `state_of_preparation_id` INT NOT NULL,
@@ -277,10 +286,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`timestamps_preparation` (
     REFERENCES `catastro`.`state_of_preparation` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-
+*/
 USE `catastro` ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
